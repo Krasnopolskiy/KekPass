@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row p-3">
+        <div class="col">
+            <h1>Храните пароли безопасно</h1>
+        </div>
+    </div>
+    <div class="row p-3">
+        <div class="col-4">
+            <div class="rounded border shadow p-3">
+                <h4 class="m-3 ms-0">Сохранить новый пароль</h4>
+                {% crispy form %}
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="p-3 pt-0">
+                {% if kekpasses %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Host</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for kekpass in kekpasses %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ kekpass.host }}</td>
+                            <td class="d-flex justify-content-end">
+                                <input type="hidden" value="{{ kekpass.password }}">
+                                <button name="copy" class="btn btn-outline-primary rounded-circle">
+                                    <i class="far fa-clipboard"></i>
+                                </button>
+                                <a href="{% url 'kekpass' pk=kekpass.pk %}"
+                                    class="btn btn-outline-secondary rounded-circle mx-2">
+                                    <i class="far fa-file"></i>
+                                </a>
+                                <a href="{% url 'remove' pk=kekpass.pk %}"
+                                    class="btn btn-outline-danger rounded-circle">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h1 class="display-6 text-center">Нет сохраненных паролей</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script>
+    function setClipboard(value) {
+        var tempInput = document.createElement('input');
+        tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
+        tempInput.value = value;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+    }
+
+    $('button[name=copy]').click((el) => {
+        let value = $(el.target).parent().children('input').val()
+        setClipboard(value)
+    })
+</script>
+{% endblock extra_js %}

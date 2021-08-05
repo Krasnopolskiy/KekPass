@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row p-3 d-fex justify-content-center">
+        <div class="col-6">
+            <div class="border rounded p-3 m-3">
+                <h1 class="text-center mb-3">Авторизация</h1>
+                {% crispy form %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    document.title += ' Авторизация'
+</script>
+{% endblock extra_js %}

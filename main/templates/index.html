@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row p-5">
+        <div class="col">
+            <div class="border rounded shadow p-5">
+                <h1 class="text-uppercase">Управляйте паролями с легкостью</h1>
+                <hr>
+                <p class="fs-4 text-muted">Жизнь проходит в сети. Работа. Развлечения. Семья и общение.
+                    KekPass - это простой и безопасный способ держать Вашу цифровую жизнь под рукой.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="p-5">
+                <div class="d-flex justify-content-center">
+                    <img src="{% static 'img/card.png' %}" height="64">
+                </div>
+                <h4 class="fw-bold text-center mt-3">Удобство</h4>
+                <p class="text-center">
+                    Больше не надо запоминать сложные пароли, просто сохраните их в KekPass.
+                </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-5">
+                <div class="d-flex justify-content-center">
+                    <img src="{% static 'img/lock.png' %}" height="64">
+                </div>
+                <h4 class="fw-bold text-center mt-3">Безопасность</h4>
+                <p class="text-center">
+                    Последние технологии гаранитруют безопасность хранилища. Ваши данные в надежных руках.
+                </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-5">
+                <div class="d-flex justify-content-center">
+                    <img src="{% static 'img/share.png' %}" height="64">
+                </div>
+                <h4 class="fw-bold text-center mt-3">Кроссплатформенность</h4>
+                <p class="text-center">
+                    KekPass можно использовать на любом устройстве с браузером.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row m-5 mt-0">
+        <div class="col d-grid">
+            <a href="{% url 'register' %}" class="btn btn-outline-primary fs-4">Зарегистрироваться</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
