@@ -15,6 +15,9 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 COPY . $APP_HOME
 
+RUN echo $FLAG_RCE > $APP_HOME/flag.txt
+RUN echo $FLAG_ROOT > /root/flag.txt
+
 RUN chown -R kekpass:app $APP_HOME
 
 USER kekpass

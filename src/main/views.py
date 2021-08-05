@@ -13,7 +13,10 @@ from main.models import KekPass
 
 
 def render_kekpass(kekpass: KekPass) -> str:
-    with open('main/templates/kekpass.html', 'r', encoding='utf-8') as template:
+    from os.path import join, dirname
+
+    template = join(dirname(__file__), 'templates/kekpass.html')
+    with open(template, 'r', encoding='utf-8') as template:
         template = template.read()
         context = {
             'pk': kekpass.pk,
@@ -72,7 +75,7 @@ class KekpassView(View, LoginRequiredMixin):
         kekpass = KekPass.objects.filter(user=request.user, pk=pk)
         if kekpass.exists():
             kekpass = kekpass.get()
-            engine = engines['django']
+            engine = engines['jinja2']
             template = engine.from_string(render_kekpass(kekpass))
             return HttpResponse(template.render({}, request))
         return redirect(reverse('storage'))

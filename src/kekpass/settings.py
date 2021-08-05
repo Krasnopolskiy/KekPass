@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from os import environ
 from pathlib import Path
 
 from django.contrib.messages import constants as messages
@@ -23,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&)v%81&9dov6vkx6av9rtuf2w#xq!0ima@k$4$1lku2)m@t6j8'
+SECRET_KEY = environ.get(
+    'DJANGO_SECRET', '36j3a@**w&^e@elqlbuw&6533x2mia7n3g0nib+9-71@008(kc'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,6 +81,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
+    },
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'APP_DIRS': True,
     },
 ]
 

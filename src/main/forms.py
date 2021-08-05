@@ -3,7 +3,7 @@ from typing import Any
 
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import ButtonHolder, Layout, Submit, Hidden
+from crispy_forms.layout import ButtonHolder, Layout, Submit
 from django.contrib.auth import forms as auth_forms
 from django import forms
 from django.http import HttpRequest
@@ -50,6 +50,6 @@ class KekPassForm(forms.ModelForm):
         self.helper = FormHelper(self)
         self.helper.layout = Layout(
             FloatingField('host'),
-            FloatingField('password',  style='font-family: monospace'),
+            FloatingField('password', style='font-family: monospace', max_length=255),
             ButtonHolder(Submit('submit', 'Сохранить')),
         )
