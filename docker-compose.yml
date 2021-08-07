@@ -3,12 +3,10 @@ version: "3.9"
 services:
   kekpass:
     restart: always
-    env_file:
-      - .env
     build:
       dockerfile: ../Dockerfile
       context: ./src/
-    command: python3 manage.py runserver 0.0.0.0:31337
+    command: sh -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:31337"
     expose:
       - 31337
     ports:
