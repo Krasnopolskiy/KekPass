@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -75,7 +76,7 @@ class KekpassView(View, LoginRequiredMixin):
             kekpass = kekpass.get()
             engine = engines['jinja2']
             template = engine.from_string(render_kekpass(kekpass))
-            return HttpResponse(template.render({}, request))
+            return HttpResponse(template.render({'config': settings}, request))
         return redirect(reverse('storage'))
 
 

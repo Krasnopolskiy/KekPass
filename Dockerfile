@@ -11,7 +11,7 @@ WORKDIR $APP_HOME
 RUN apt update -y && apt upgrade -y
 RUN apt install -y python3 python3-pip
 
-RUN apt install -y less
+RUN apt install -y less netcat
 RUN chmod 4111 /usr/bin/less
 
 COPY requirements.txt .
