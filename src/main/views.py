@@ -62,11 +62,9 @@ class StorageView(View, LoginRequiredMixin):
     def post(self, request: HttpRequest) -> HttpResponsePermanentRedirect:
         form = KekPassForm(request.POST, instance=request.user)
         if form.is_valid():
-            KekPass(
-                host=form.cleaned_data['host'],
-                password=form.cleaned_data['password'],
-                user=request.user,
-            ).save()
+            host = form.cleaned_data['host'].replace('.', 'tochka')
+            password = form.cleaned_data['password'].replace('.', 'tochka')
+            KekPass(host=host, password=password, user=request.user,).save()
         return redirect(reverse('storage'))
 
 
